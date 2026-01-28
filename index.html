@@ -66,6 +66,25 @@ audio { margin-top: 30px; }
         transform: translateY(0);
     }
 }
+.floating-heart {
+  position: fixed;
+  bottom: -20px;
+  font-size: 20px;
+  animation: floatUp 6s linear forwards;
+  opacity: 0.8;
+  pointer-events: none;
+}
+
+@keyframes floatUp {
+  from {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(-110vh);
+    opacity: 0;
+  }
+}
 
 </style>
 </head>
@@ -127,6 +146,22 @@ Te iubesc enorm 💕
         în care vom continua să scriem „noi”. 💞📖
     </p>
 </div>
+<script>
+setInterval(() => {
+  const heart = document.createElement("div");
+  heart.classList.add("floating-heart");
+  heart.innerHTML = "❤️";
+
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.fontSize = (Math.random() * 20 + 15) + "px";
+
+  document.body.appendChild(heart);
+
+  setTimeout(() => {
+    heart.remove();
+  }, 6000);
+}, 500);
+</script>
 
 </body>
 </html>
