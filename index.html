@@ -72,7 +72,49 @@ audio { margin-top: 30px; }
   font-size: 20px;
   animation: floatUp 6s linear forwards;
   opacity: 0.8;
-  pointer-events: none;
+  pointer-events: auto;
+}
+.click-heart {
+  width: 140px;
+  height: 140px;
+  background: red;
+  position: relative;
+  margin: 30px auto;
+  transform: rotate(-45deg);
+  cursor: pointer;
+  animation: pulse 1.5s infinite;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+  font-size: 22px;
+}
+
+.heart::before,
+.heart::after {
+  content: "";
+  width: 140px;
+  height: 140px;
+  background: red;
+  border-radius: 50%;
+  position: absolute;
+}
+
+.heart::before {
+  top: -70px;
+  left: 0;
+}
+
+.heart::after {
+  left: 70px;
+  top: 0;
+}
+
+@keyframes pulse {
+  0% { transform: rotate(-45deg) scale(1); }
+  50% { transform: rotate(-45deg) scale(1.1); }
+  100% { transform: rotate(-45deg) scale(1); }
 }
 
 @keyframes floatUp {
@@ -90,6 +132,9 @@ audio { margin-top: 30px; }
 </head>
 
 <body>
+<div id="heartStart" class="heart">
+  CLICK
+</div>
 
 <div class="heart">❤️</div>
 <h1>Pentru tine, zăpăcita mea ❤️</h1>
@@ -106,6 +151,15 @@ Te iubesc enorm 💕
 </audio>
 
  <div class="love-text">
+<script>
+const heart = document.getElementById("heartStart");
+const music = document.getElementById("music");
+
+heart.addEventListener("click", () => {
+  music.play();
+  heart.style.display = "none";
+});
+</script>
 
     <p>
         Într-o lume care aleargă prea repede, te-am întâlnit pe tine.
@@ -146,7 +200,19 @@ Te iubesc enorm 💕
         Te iubesc azi, te iubesc mâine și în toate zilele
         în care vom continua să scriem „noi”. 💞📖
     </p>
-</div>
+<div id="heartButton">❤️</div>
+
+  <audio id="music" loop>
+  <source src="melodie.mp3" type="audio/mpeg">
+</audio>
+const music = document.getElementById("music");
+const heartButton = document.getElementById("heartButton");
+
+heartButton.addEventListener("click", () => {
+  music.play();
+  heartButton.style.display = "none";
+});
+
 <script>
 setInterval(() => {
   const heart = document.createElement("div");
@@ -162,13 +228,6 @@ setInterval(() => {
     heart.remove();
   }, 6000);
 }, 500);
-</script>
-<script>
-document.addEventListener("click", () => {
-  const music = document.getElementById("music");
-  music.muted = false;
-  music.play();
-}, { once: true });
 </script>
 
 
